@@ -48,11 +48,15 @@ char	*ft_substr(char *str, int start, int length)
 	int	i;
 	char *result;
 
-	if (!(result = malloc(sizeof(char) * (length - start))))
+	if (!str)
 		return (NULL);
-	while (i < length)
+	if (!(result = malloc(sizeof(char) * (length - start) + 1)))
+		return (NULL);
+	i = 0;
+	while (str[start] != '\0' && i < length)
 		result[i++] = str[start++];
 	result[i] = '\0';
+	free(str);
 	return (result);
 }
 
@@ -80,28 +84,29 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (result);
 }
 
-int	extract_line(char **line, char *str, int lf_idx)
-{
-	*line = ft_strdup(ft_substr(str, 0, lf_idx));
-	str = ft_substr(str, lf_idx, ft_strlen(str));
-	return (1);
-}
-
 int	get_next_line(char **line)
 {
 	static char	*stc_buff;
 	char	buff[BUFF_SIZE];
+	char	*tmp;
 	int	read_len;
 	int	lf_idx;
 
-	stc_buff = ft_strdup("");
+	if (!stc_buff) 
+		stc_buff = ft_strdup("");
 	while ((read_len = read(0, buff, BUFF_SIZE)) > 0)
 	{
 		buff[read_len] = '\0';
 		stc_buff = ft_strjoin(stc_buff, buff);
+		printf("buff : %s", stc_buff);
 		if ((lf_idx = ft_strchr(stc_buff, '\n')) >= 0)
-			return (extract_line(line, stc_buff, lf_idx));
+		{
+			tmp = ft_strdup(stc_buff);
+			*line = ft_substr(stc_buff, 0, lf_idx);
+			stc_buff = ft_substr(tmp, lf_idx + 1, ft_strlen(tmp));
+			return (1);
+		}
 	}
-
-	return (0);
+	free(stc_buff);
+	return (read_len);
 }
