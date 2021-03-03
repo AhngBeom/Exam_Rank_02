@@ -21,7 +21,7 @@ int main()
 		} 
 		if(rtn == 0)
 			break;
-		printf("%s\n", line);
+		printf("line : %s\n", line);
 	}
 /*
 	while(1)

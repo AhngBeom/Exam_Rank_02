@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
 	size_t	count;
 
@@ -48,7 +48,7 @@ char	*ft_substr(char *str, int start, int length)
 	int	i;
 	char *result;
 
-	if (!(result = malloc(sizeof(char) * (length - start) + 1)))
+	if (!(result = malloc(sizeof(char) * (length - start))))
 		return (NULL);
 	while (i < length)
 		result[i++] = str[start++];
@@ -76,7 +76,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	j = 0;
 	while (s2[j] != '\0')
 		result[i++] = s2[j++];
-	free(s2);
+	result[i] = '\0';
 	return (result);
 }
 
@@ -94,12 +94,10 @@ int	get_next_line(char **line)
 	int	read_len;
 	int	lf_idx;
 
-	//stc_buff = ft_strdup("");
-	printf("Hello\n");
+	stc_buff = ft_strdup("");
 	while ((read_len = read(0, buff, BUFF_SIZE)) > 0)
 	{
 		buff[read_len] = '\0';
-		printf("buff : %s\n", buff);
 		stc_buff = ft_strjoin(stc_buff, buff);
 		if ((lf_idx = ft_strchr(stc_buff, '\n')) >= 0)
 			return (extract_line(line, stc_buff, lf_idx));
