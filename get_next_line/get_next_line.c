@@ -98,7 +98,6 @@ int	get_next_line(char **line)
 	{
 		buff[read_len] = '\0';
 		stc_buff = ft_strjoin(stc_buff, buff);
-		printf("buff : %s", stc_buff);
 		if ((lf_idx = ft_strchr(stc_buff, '\n')) >= 0)
 		{
 			tmp = ft_strdup(stc_buff);
