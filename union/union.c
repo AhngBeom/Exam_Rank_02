@@ -23,21 +23,18 @@ int main(int argc, char *argv[])
 		i = 0;
 		while (argv[1][i] != '\0')
 		{
-			j = 0;
 			if (!dupl_check(argv[1], i - 1, argv[1][i]))
-			{
-				while (argv[2][j] != '\0')
-				{
-					if (argv[1][i] == argv[2][j])
-					{
-						write(1, &argv[1][i], 1);
-						break ;
-					}
-					j++;
-				}
-			}
+				write(1, &argv[1][i], 1);
 			i++;
 		}
+		j = 0;
+		while (argv[2][j] != '\0')
+		{
+			if (!dupl_check(argv[1], i - 1, argv[2][j]) && !dupl_check(argv[2], j - 1, argv[2][j]))
+				write(1, &argv[2][j], 1);
+			j++;
+		}
+
 	}
 	write(1, &lf, 1);
 	return (0);
