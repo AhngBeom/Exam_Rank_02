@@ -58,10 +58,10 @@ char	*ft_substr(char *str, int start, int length)
 	int i;
 	char *result;
 
-	if(!(result = malloc(sizeof(char) * (length - start) + 1)))
+	if(!(result = malloc(sizeof(char) * length + 1)))
 		return (NULL);
 	i = 0;
-	while (str[start] != '\0' && start < length)
+	while (str[start] != '\0' && i < length)
 		result[i++] = str[start++];
 	result[i] = '\0';
 	return (result);
@@ -94,20 +94,16 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (result);
 }
 
-int	ft_putnbr(int num)
+char	*ft_itoa(int num, char *base)
 {
-	int ret;
-	char ch;
+	char *result;
 
-	ret = 0;
-	ch = '0';
-	if (num / 10 > 0)
-	{
-		ret += ft_putnbr(num / 10);
-	}
-	ch += num % 10;
-	ret += write(1, &ch, 1);
-	return (ret);
+	if (num / ft_strlen(base) > 0)
+		result = ft_itoa(num / ft_strlen(base), base);
+	else
+		result = ft_strdup("");
+	result = ft_strjoin(result, ft_substr(base, num % ft_strlen(base), 1));
+	return (result);
 }
 
 t_opt	init_option()
@@ -159,40 +155,50 @@ size_t	str_format(t_opt opt, char *arg)
 size_t	int_format(t_opt opt, int arg)
 {
 	int ret;
-	int width;
-	int prec;
 	char *str;
 
 	ret = 0;
-	width = opt.width;
-	prec = opt.prec;
-	str = ft_strdup("");
-	
-	if (prec > ft_nbrlen(arg))
+	str = ft_itoa(arg, "0123456789");
+
+	if (opt.prec > ft_nbrlen(arg))
 	{
-		while (prec-- > ft_nbrlen(arg))
+		while (ft_strlen(str) != opt.prec)
 			str = ft_strjoin(ft_strdup("0"), str);
 	}
 		
-	if (width > (ft_nbrlen(arg) + ft_strlen(str)))
+	if (opt.width > (ft_strlen(str)))
 	{
-		while (width-- > (ft_nbrlen(arg) + ft_strlen(str)))
+		while (ft_strlen(str) != opt.width)
 			str = ft_strjoin(ft_strdup(" "), str);
-		printf("width : |%s|\n", str);
 	}
 	ret += write(1, str, ft_strlen(str));
-	ret += ft_putnbr(arg);
+	free(str);
 	return (ret);
 }
-/*
+
 size_t	hex_format(t_opt opt, unsigned int arg)
 {
 	int ret;
+	char *str;
 
 	ret = 0;
+	str = ft_itoa(arg, "0123456789abcdef");
+	
+	if (opt.prec > ft_nbrlen(arg))
+	{
+		while (ft_strlen(str) != opt.prec)
+			str = ft_strjoin(ft_strdup("0"), str);
+	}
 
+	if (opt.width > ft_strlen(str))
+	{
+		while (ft_strlen(str) != opt.width)
+			str = ft_strjoin(ft_strdup(" "), str);
+	}
+	ret += write(1, str, ft_strlen(str));
+	free(str);
 	return (ret);
-}*/
+}
 
 int ft_printf(const char *str, ...)
 {
@@ -221,8 +227,8 @@ int ft_printf(const char *str, ...)
 					rtn += str_format(opt, va_arg(ap, char *));
 				if (opt.type == 'd')
 					rtn += int_format(opt, va_arg(ap, int));
-				//if (opt.type == 'x')
-				//	rtn += hex_format(opt, va_arg(ap, unsigned int));
+				if (opt.type == 'x')
+					rtn += hex_format(opt, va_arg(ap, unsigned int));
 			}
 		}
 		i++;
