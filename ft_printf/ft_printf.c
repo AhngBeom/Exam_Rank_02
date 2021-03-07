@@ -94,10 +94,12 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (result);
 }
 
-char	*ft_itoa(int num, char *base)
+char	*ft_itoa(long long num, char *base)
 {
 	char *result;
 
+	if (num < 0)
+		num *= -1;
 	if (num / ft_strlen(base) > 0)
 		result = ft_itoa(num / ft_strlen(base), base);
 	else
@@ -163,14 +165,14 @@ size_t	int_format(t_opt opt, int arg)
 
 	ret = 0;
 	sign = ft_strdup("");
-	if (arg < 0)
+	if (opt.prec == 0)
+		str = ft_strdup("");
+	else	
 	{
-		sign = ft_strjoin(sign, ft_strdup("-"));
-		str = ft_itoa(arg * -1, "0123456789");
-	}
-	else
+ 		if (arg < 0)
+			sign = ft_strjoin(sign, ft_strdup("-"));
 		str = ft_itoa(arg, "0123456789");
-
+	}
 	if (opt.prec > ft_strlen(str))
 	{
 		while (ft_strlen(str) != opt.prec)

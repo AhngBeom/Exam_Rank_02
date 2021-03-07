@@ -1,11 +1,12 @@
 #include <stdio.h>
+#include <limits.h>
 
 int ft_printf(const char *, ... );
 
 int main()
 {
 
-	printf(" (return : %d)\n", ft_printf("%.0d", 0));
+	printf(" (return : %d)\n", ft_printf("%d", INT_MAX + 2));
 	
 	/*
 	printf(" (return : %d)\n", printf("   printf : |%10.s|", "abcde"));
