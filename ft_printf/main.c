@@ -5,7 +5,7 @@ int ft_printf(const char *, ... );
 int main()
 {
 
-	printf(" (return : %d)\n", ft_printf("%9.1s", NULL));
+	printf(" (return : %d)\n", ft_printf("this %d number", -267));
 	
 	/*
 	printf(" (return : %d)\n", printf("   printf : |%10.s|", "abcde"));
