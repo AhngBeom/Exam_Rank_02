@@ -139,14 +139,14 @@ size_t	str_format(t_opt opt, char *arg)
 
 	ret = 0;
 
-	if (arg == NULL)
-		str = ft_strdup("(null)");
-	else if (opt.prec == 0)
+	if (opt.prec == 0)
 		str = ft_strdup("");
-	else if (opt.prec > 0 && opt.prec <= ft_strlen(arg))
-		str = ft_substr(arg, 0, opt.prec);
+	else if (arg == NULL)
+		str = ft_strdup("(null)");
 	else
 		str = ft_strdup(arg);
+	if (opt.prec > 0 && opt.prec < ft_strlen(str))
+		str = ft_substr(str, 0, opt.prec);
 	pad = opt.width - ft_strlen(str);
 	while (pad-- > 0)
 		ret += write(1, " ", 1);
