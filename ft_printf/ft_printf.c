@@ -158,17 +158,25 @@ size_t	str_format(t_opt opt, char *arg)
 size_t	int_format(t_opt opt, int arg)
 {
 	int ret;
+	char *sign;
 	char *str;
 
 	ret = 0;
-	str = ft_itoa(arg, "0123456789");
+	sign = ft_strdup("");
+	if (arg < 0)
+	{
+		sign = ft_strjoin(sign, ft_strdup("-"));
+		str = ft_itoa(arg * -1, "0123456789");
+	}
+	else
+		str = ft_itoa(arg, "0123456789");
 
-	if (opt.prec > ft_nbrlen(arg))
+	if (opt.prec > ft_strlen(str))
 	{
 		while (ft_strlen(str) != opt.prec)
 			str = ft_strjoin(ft_strdup("0"), str);
 	}
-		
+	str = ft_strjoin(sign, str);
 	if (opt.width > (ft_strlen(str)))
 	{
 		while (ft_strlen(str) != opt.width)
