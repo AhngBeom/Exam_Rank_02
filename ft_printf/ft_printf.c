@@ -138,7 +138,10 @@ size_t	str_format(t_opt opt, char *arg)
 	int pad;
 
 	ret = 0;
-	if (opt.prec == 0)
+
+	if (arg == NULL)
+		str = ft_strdup("(null)");
+	else if (opt.prec == 0)
 		str = ft_strdup("");
 	else if (opt.prec > 0 && opt.prec <= ft_strlen(arg))
 		str = ft_substr(arg, 0, opt.prec);
@@ -218,7 +221,7 @@ int ft_printf(const char *str, ...)
 		{
 			i++;
 			opt = init_option();
-			while ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
+			while ((str[i] >= '0' && str[i] <= '9') || str[i] == '.' || str[i] == '-')
 				set_option(&opt, str[i++]);
 			if (str[i] == 's' || str[i] == 'd' || str[i] == 'x')
 			{
@@ -230,6 +233,8 @@ int ft_printf(const char *str, ...)
 				if (opt.type == 'x')
 					rtn += hex_format(opt, va_arg(ap, unsigned int));
 			}
+			else
+				return (rtn);
 		}
 		i++;
 	}
