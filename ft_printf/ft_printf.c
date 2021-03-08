@@ -150,8 +150,11 @@ size_t	str_format(t_opt opt, char *arg)
 	if (opt.prec > 0 && opt.prec < ft_strlen(str))
 		str = ft_substr(str, 0, opt.prec);
 //	pad = opt.width - ft_strlen(str);
-	while (opt.width != ft_strlen(str))
-		str = ft_strjoin(ft_strdup(" "), str);
+	if (opt.width > ft_strlen(str))
+	{
+		while (opt.width != ft_strlen(str))
+			str = ft_strjoin(ft_strdup(" "), str);
+	}
 	ret += write(1, str, ft_strlen(str));
 	free(str);
 	return (ret);
