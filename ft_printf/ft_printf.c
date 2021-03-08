@@ -137,7 +137,7 @@ size_t	str_format(t_opt opt, char *arg)
 {
 	int ret;
 	char *str;
-	int pad;
+//	int pad;
 
 	ret = 0;
 
@@ -149,9 +149,9 @@ size_t	str_format(t_opt opt, char *arg)
 		str = ft_strdup(arg);
 	if (opt.prec > 0 && opt.prec < ft_strlen(str))
 		str = ft_substr(str, 0, opt.prec);
-	pad = opt.width - ft_strlen(str);
-	while (pad-- > 0)
-		ret += write(1, " ", 1);
+//	pad = opt.width - ft_strlen(str);
+	while (opt.width-- > ft_strlen(str))
+		str = ft_strjoin(ft_strdup(" "), str);
 	ret += write(1, str, ft_strlen(str));
 	free(str);
 	return (ret);
