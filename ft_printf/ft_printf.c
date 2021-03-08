@@ -137,9 +137,6 @@ size_t	str_format(t_opt opt, char *arg)
 {
 	int ret;
 	char *str;
-//	int pad;
-
-	ret = 0;
 
 	if (opt.prec == 0)
 		str = ft_strdup("");
@@ -149,13 +146,12 @@ size_t	str_format(t_opt opt, char *arg)
 		str = ft_strdup(arg);
 	if (opt.prec > 0 && opt.prec < ft_strlen(str))
 		str = ft_substr(str, 0, opt.prec);
-//	pad = opt.width - ft_strlen(str);
 	if (opt.width > ft_strlen(str))
 	{
 		while (opt.width != ft_strlen(str))
 			str = ft_strjoin(ft_strdup(" "), str);
 	}
-	ret += write(1, str, ft_strlen(str));
+	ret = write(1, str, ft_strlen(str));
 	free(str);
 	return (ret);
 }
@@ -166,7 +162,6 @@ size_t	int_format(t_opt opt, int arg)
 	char *sign;
 	char *str;
 
-	ret = 0;
 	sign = ft_strdup("");
 	if (opt.prec == 0)
 		str = ft_strdup("");
@@ -187,7 +182,7 @@ size_t	int_format(t_opt opt, int arg)
 		while (ft_strlen(str) != opt.width)
 			str = ft_strjoin(ft_strdup(" "), str);
 	}
-	ret += write(1, str, ft_strlen(str));
+	ret = write(1, str, ft_strlen(str));
 	free(str);
 	return (ret);
 }
