@@ -197,7 +197,7 @@ size_t	hex_format(t_opt opt, unsigned int arg)
 	ret = 0;
 	str = ft_itoa(arg, "0123456789abcdef");
 	
-	if (opt.prec > ft_nbrlen(arg))
+	if (opt.prec > ft_strlen(str))
 	{
 		while (ft_strlen(str) != opt.prec)
 			str = ft_strjoin(ft_strdup("0"), str);

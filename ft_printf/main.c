@@ -6,7 +6,7 @@ int ft_printf(const char *, ... );
 int main()
 {
 
-	printf(" (return : %d)\n", ft_printf("%d", INT_MAX + 2));
+	printf(" (return : %d)\n", ft_printf("%10.10x", 8000));
 	
 	/*
 	printf(" (return : %d)\n", printf("   printf : |%10.s|", "abcde"));
