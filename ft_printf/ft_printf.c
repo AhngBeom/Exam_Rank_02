@@ -21,21 +21,6 @@ int	ft_strlen(char *str)
 	return (count);
 }
 
-int	ft_nbrlen(int num)
-{
-	int length;
-
-	if (num == 0)
-		return (1);
-	length = 0;
-	while (num > 0)
-	{
-		num /= 10;
-		length++;
-	}
-	return (length);
-}
-
 char	*ft_strdup(char *str)
 {
 	int i;
