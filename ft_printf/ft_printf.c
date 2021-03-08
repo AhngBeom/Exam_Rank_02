@@ -192,9 +192,7 @@ size_t	hex_format(t_opt opt, unsigned int arg)
 	int ret;
 	char *str;
 
-	ret = 0;
 	str = ft_itoa(arg, "0123456789abcdef");
-	
 	if (opt.prec > ft_strlen(str))
 	{
 		while (ft_strlen(str) != opt.prec)
@@ -206,7 +204,7 @@ size_t	hex_format(t_opt opt, unsigned int arg)
 		while (ft_strlen(str) != opt.width)
 			str = ft_strjoin(ft_strdup(" "), str);
 	}
-	ret += write(1, str, ft_strlen(str));
+	ret = write(1, str, ft_strlen(str));
 	free(str);
 	return (ret);
 }
