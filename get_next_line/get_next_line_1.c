@@ -64,7 +64,7 @@ char	*ft_substr(char *str, int start, int end)
 	if(!(result = malloc(sizeof(char) * (end - start) + 1)))
 		return (NULL);
 	i = 0;
-	while (i <= end && str[start] != '\0')
+	while (i < end && str[start] != '\0')
 	{
 		result[i++] = str[start++];
 	}
@@ -111,7 +111,7 @@ int	get_next_line(char **line)
 		if ((lf = ft_strchr(stc_buff, '\n')) >= 0)
 		{
 			backup = ft_strdup(stc_buff);
-			*line = ft_substr(stc_buff, 0, lf - 1);
+			*line = ft_substr(stc_buff, 0, lf);
 			stc_buff = ft_substr(backup, lf + 1, ft_strlen(backup));
 			return (1);
 		}
