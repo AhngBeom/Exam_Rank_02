@@ -11,4 +11,4 @@ echo "The last line should say '0 leaks for 0 total leaked bytes.'"
 echo "Come back to this terminal and type Ctrl + D"
 echo "This should close the test"
 echo ""
-gcc -Wall -Werror -Wextra ./gnl_tester_stdin.c ./get_next_line_1.c -I ../ && ./a.out
+gcc -Wall -Werror -Wextra ./gnl_tester_stdin.c ./get_next_line.c -I ../ && ./a.out
