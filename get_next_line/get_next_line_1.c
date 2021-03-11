@@ -54,17 +54,17 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (result);
 }
 
-char	*ft_substr(char *str, int start, int length)
+char	*ft_substr(char *str, int start, int end)
 {
 	char *result;
 	int i;
 
 	if (!str)
 		return (NULL);
-	if(!(result = malloc(sizeof(char) * (length - start) + 1)))
+	if(!(result = malloc(sizeof(char) * (end - start) + 1)))
 		return (NULL);
 	i = 0;
-	while (i < length)
+	while (i <= end && str[start] != '\0')
 	{
 		result[i++] = str[start++];
 	}
@@ -111,11 +111,10 @@ int	get_next_line(char **line)
 		if ((lf = ft_strchr(stc_buff, '\n')) >= 0)
 		{
 			backup = ft_strdup(stc_buff);
-			*line = ft_substr(stc_buff, 0, lf);
-			stc_buff = ft_substr(backup, lf, ft_strlen(backup));
+			*line = ft_substr(stc_buff, 0, lf - 1);
+			stc_buff = ft_substr(backup, lf + 1, ft_strlen(backup));
 			return (1);
 		}
-
 	}
 	free(buff);
 	if (read_val < 0)
