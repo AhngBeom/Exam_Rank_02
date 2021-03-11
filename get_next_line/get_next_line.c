@@ -55,8 +55,8 @@ char	*ft_substr(char *str, int start, int length)
 	i = 0;
 	while (str[start] != '\0' && i < length)
 		result[i++] = str[start++];
-	result[i] = '\0';
 	free(str);
+	result[i] = '\0';
 	return (result);
 }
 
@@ -87,22 +87,22 @@ char	*ft_strjoin(char *s1, char *s2)
 int	get_next_line(char **line)
 {
 	static char	*stc_buff;
-	char	buff[BUFF_SIZE];
-	char	*tmp;
+	char	buff[2];
+	char	*backup;
 	int	read_len;
 	int	lf_idx;
 
 	if (!stc_buff) 
 		stc_buff = ft_strdup("");
-	while ((read_len = read(0, buff, BUFF_SIZE)) > 0)
+	while ((read_len = read(0, buff, 1)) > 0)
 	{
 		buff[read_len] = '\0';
 		stc_buff = ft_strjoin(stc_buff, buff);
 		if ((lf_idx = ft_strchr(stc_buff, '\n')) >= 0)
 		{
-			tmp = ft_strdup(stc_buff);
+			backup = ft_strdup(stc_buff);
 			*line = ft_substr(stc_buff, 0, lf_idx);
-			stc_buff = ft_substr(tmp, lf_idx + 1, ft_strlen(tmp));
+			stc_buff = ft_substr(backup, lf_idx + 1, ft_strlen(backup));
 			return (1);
 		}
 	}
