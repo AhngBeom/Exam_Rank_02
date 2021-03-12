@@ -109,7 +109,7 @@ int	get_next_line(char **line)
 			stc_buff = ft_strjoin(stc_buff, buff);
 		if ((lf = ft_strchr(stc_buff, '\n')) >= 0)
 		{
-			//free(buff);
+			free(buff);
 			backup = ft_strdup(stc_buff);
 			*line = ft_substr(stc_buff, 0, lf);
 			stc_buff = ft_substr(backup, lf + 1, ft_strlen(backup) - (lf + 1));
