@@ -8,6 +8,7 @@ int main()
 	printf(" (return : %d)\n", ft_printf("Hello World !"));
 
 	printf("=============String Format===============\n");
+	printf(" (return : %d)\n", ft_printf("ft_printf : |%10s|", "abcde"));
 	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.s|", "abcde"));
 	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.0s|", "abcde"));
 	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.3s|", "abcde"));
