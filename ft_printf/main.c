@@ -36,6 +36,10 @@ int main()
 	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.3x|", 65535));
 	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.6x|", 65535));
 	
-
+	printf("=============Exception Format===============\n");
+	printf(" (return : %d)\n", ft_printf("ft_printf : |%|"));
+	printf(" (return : %d)\n", ft_printf("ft_printf : |%5|"));
+	printf(" (return : %d)\n", ft_printf("ft_printf : |%05|"));
+	
 	return (0);
 }

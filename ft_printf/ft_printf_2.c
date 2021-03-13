@@ -24,6 +24,7 @@ static	void	set_opt(t_opt *opt, char ch)
 		return ;
 }
 
+
 static	int	ft_strlen(char *str)
 {
 	int	count;
@@ -83,7 +84,7 @@ static	char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	if (!(result = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
 		return (NULL);
-	
+
 	i = 0;
 	while (s1[i] != '\0')
 	{
@@ -126,9 +127,9 @@ static	int	str_format(t_opt opt, char *str)
 		str = "";
 	else if (!str)
 		str = "(null)";
-	
+
 	result = ft_strdup(str);
-	
+
 	if (opt.prec > 0 && opt.prec < ft_strlen(result))
 	{
 		result = ft_substr(result, 0, opt.prec);
@@ -199,6 +200,22 @@ static	int	hex_format(t_opt opt, unsigned int num)
 
 }
 
+static	int	output(t_opt opt, va_list ap)
+{
+	int	ret;
+
+	ret = 0;
+	if (opt.type == 's')
+		ret += str_format(opt, va_arg(ap, char *));
+	else if (opt.type == 'd')
+		ret += int_format(opt, va_arg(ap, int));
+	else if (opt.type == 'x')
+		ret += hex_format(opt, va_arg(ap, unsigned int));
+	else
+		ret += 0;
+	return (ret);
+}
+
 int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
@@ -221,15 +238,11 @@ int	ft_printf(const char *str, ...)
 			opt.type = '\0';
 			while ((str[i] >= '0' && str[i] <= '9') || str[i] == '.' || str[i] == '-')
 				set_opt(&opt, str[i++]);
-			opt.type = str[i++];
-			if (opt.type == 's')
-				ret += str_format(opt, va_arg(ap, char *));
-			else if (opt.type == 'd')
-				ret += int_format(opt, va_arg(ap, int));
-			else if (opt.type == 'x')
-				ret += hex_format(opt, va_arg(ap, unsigned int));
-			else
-				ret += 0;
+			if (str[i] == 's' || str[i] == 'd' || str[i] == 'x')
+			{
+				opt.type = str[i++];
+				ret += output(opt, ap);
+			}
 		}
 	}
 	va_end(ap);
