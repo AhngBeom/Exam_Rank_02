@@ -117,14 +117,13 @@ static	char	*ft_itoa(long long num, char *base)
 	result = ft_strdup("");
 	base_len = ft_strlen(base);
 	
-	if (num / base_len > base_len)
+	if (num / base_len > 0)
 	{
 		result = ft_itoa(num / base_len, base);
-		//result = ft_strjoin(result, ft_substr(base, num % base_len, 1));
+		result = ft_strjoin(result, ft_itoa(num % base_len, base));
 	}
 	else
-		result = ft_strjoin(result, ft_substr(base, num / base_len, 1));
-	result = ft_strjoin(result, ft_substr(base, num % base_len, 1));
+		result = ft_strjoin(result, ft_substr(base, num % base_len, 1));
 	return (result);
 }
 

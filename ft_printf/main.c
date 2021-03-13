@@ -17,6 +17,8 @@ int main()
 	
 	
 	printf("=============Integer Format===============\n");
+	printf(" (return : %d)\n", ft_printf("ft_printf : |%d|", 0));
+	printf(" (return : %d)\n", ft_printf("ft_printf : |%d|", 3));
 	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.d|", 12345));
 	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.0d|", 12345));
 	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.3d|", 12345));
