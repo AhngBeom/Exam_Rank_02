@@ -24,7 +24,6 @@ static	void	set_opt(t_opt *opt, char ch)
 		return ;
 }
 
-
 static	int	ft_strlen(char *str)
 {
 	int	count;

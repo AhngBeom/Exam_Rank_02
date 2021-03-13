@@ -121,6 +121,9 @@ static	char	*ft_itoa(long long num, char *base)
 	{
 		result = ft_itoa(num / base_len, base);
 		result = ft_strjoin(result, ft_itoa(num % base_len, base));
+		// 메모리 누수 !!!
+		// result를 초기 메모리 할당 과정을 거쳤기 때문에 
+		// 기존 result를 메모리 해제하고 재귀 함수 및 병합 함수를 호출해야한다.
 	}
 	else
 		result = ft_strjoin(result, ft_substr(base, num % base_len, 1));
