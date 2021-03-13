@@ -40,6 +40,7 @@ int main()
 	printf(" (return : %d)\n", ft_printf("ft_printf : |%|"));
 	printf(" (return : %d)\n", ft_printf("ft_printf : |%5|"));
 	printf(" (return : %d)\n", ft_printf("ft_printf : |%05|"));
+	printf(" (return : %d)\n", ft_printf("ft_printf : |%-5|"));
 	
 	return (0);
 }
