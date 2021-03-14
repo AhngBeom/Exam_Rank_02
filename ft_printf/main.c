@@ -24,10 +24,10 @@ int main()
 	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.0d|", 12345));
 	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.3d|", 12345));
 	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.7d|", 12345));
-	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.5d|", INT_MIN));
-	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.15d|", INT_MIN - 1));
-	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.5d|", INT_MAX));
-	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.14d|", INT_MAX + 1));
+	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.5d|", -2147483648));
+	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.15d|", -2147483648 - 1));
+	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.5d|", 2147483647));
+	printf(" (return : %d)\n", ft_printf("ft_printf : |%10.14d|", 2147483647 + 1));
 
 	
 	printf("=============Hex Format===============\n");
