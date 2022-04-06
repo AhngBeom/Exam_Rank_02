@@ -1,4 +1,4 @@
-# Exam_Rank_02 [![bahn's 42Project Score](https://badge42.herokuapp.com/api/project/bahn/Exam Rank 02)](https://github.com/JaeSeoKim/badge42)
+# Exam_Rank_02 [![bahn's 42 Exam Rank 02 Score](https://badge42.vercel.app/api/v2/cl1n6fb2j003009l0lfanbfyx/project/2114689)](https://github.com/JaeSeoKim/badge42)
 
 ## 준비물
 * A4
